@@ -4,7 +4,7 @@
 
 0. Write an `add()` function that will take any number of parameters in the next manner:
    ```js
-   console.log(add(2)(5)(7)(1)(6)(5)(10)()); // 261
+   console.log(add(2)(5)(7)(1)(6)(5)(10)()); // 36
 1. Write function, which takes two strings, and returns true if they are anagrams of one another.
 2. Write the clone function so that it can clone deeply the object passed as a parameter.
 3. Write a function-wrapper, that will cache the result of any other function.
