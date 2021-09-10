@@ -20,7 +20,9 @@ const results = await runSequentially(array, (item, index) =>
 IDE must consider variables from example as next:
 
 item type = string
+
 index type = number
+
 results type = Array<{item: string, index: number}>
 
 2. Write a function that accepts any kind of array and a predicate for array elements removing. Passed array must be mutated. All removed elements must be returned as array
@@ -37,11 +39,13 @@ const removedElements = arrayMutateRemove(array, (item) => item % 2 === 0);
 IDE must consider variables from example as next:
 
 item: number
+
 removedElements: Array<number>
 
 result of invocation:
 
 array = [1, 3, 7, 9]
+
 removedElements = [2, 6]
 
 ### Useful links:
