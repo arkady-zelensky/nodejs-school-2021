@@ -2,7 +2,7 @@
 
 ### :house: Home task
 
-0. Cover home tasks from lecture 1 with TS (if it isn't been covered)
+0. Cover home tasks from lecture 1 with TS (if it hasn't been covered)
 1. Write a function that accepts any kind of array and an asynchronous callback, that is invoked on each array element sequentially. The result of invocation must be an array of callback results. All types must apply automatically (Template function).
    Invocation example:
 
