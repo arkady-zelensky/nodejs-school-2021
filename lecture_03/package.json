@@ -1,0 +1,24 @@
+{
+  "name": "lecture_03",
+  "version": "1.0.0",
+  "description": "### :house: Home task",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf build && tsc --project tsconfig.json"
+  },
+  "type": "commonjs",
+  "keywords": [],
+  "author": "Arkadii Zelenskyi",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.9.1",
+    "@types/yargs": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "node-fetch": "^3.0.0",
+    "yargs": "^17.1.1"
+  }
+}
