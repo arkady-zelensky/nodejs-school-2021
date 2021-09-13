@@ -26,9 +26,6 @@ console.log(myUrl.searchParams);
 myUrl.searchParams.append('status', 'stale');
 console.log(myUrl.searchParams);
 
-// Loop through params
-myUrl.searchParams.forEach((value, name) => console.log(`${name}: ${value}`));
-
 const myURL = new URL('https://example.org');
 myURL.pathname = '/a/b/c';
 myURL.search = '?d=e';

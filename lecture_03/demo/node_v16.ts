@@ -40,9 +40,8 @@ async function makeRequest() {
     const response = await fetch('https://httpstat.us/200?sleep=5000', {
       signal: cancelRequest.signal,
     });
-    const responseData = await response.json();
-
-    return responseData;
+    console.log('Got response');
+    return true;
   } catch (error) {
     if (error.name === 'AbortError') {
       console.error('Request was aborted');

@@ -4,7 +4,8 @@
   "description": "### :house: Home task",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf build && tsc --project tsconfig.json"
+    "build": "rimraf build && tsc -p tsconfig.json",
+    "start": "node .build/node_v16.js"
   },
   "type": "commonjs",
   "keywords": [],
