@@ -4,7 +4,7 @@
 
 0. Write a node.JS program with TypeScript that gets from the command line string parameter - path to JSON file, reads and parses its content. 
 Then, program should create a folder “<JSON_filename>_pages”. For each link in the file get the HTML content of it and save it to the file in the created folder.
-JSON file contains an array of strings - links. Example of the file you can find at `lecture_03/links.json`.
+JSON file contains an array of strings - links. Example of the file you can find [here](/lecture_03/links.json).
 
 1. Write a node.JS program with TypeScript that gets from the command line numeric parameter - frequency in seconds.
 Program should print every tick (defined by frequency) next system information:
