@@ -6,7 +6,7 @@
 Then, program should create a folder “<JSON_filename>_pages”. For each link in the file get the HTML content of it and save it to the file in the created folder.
 JSON file contains an array of strings - links. Example of the file you can find at `lecture_03/links.json`.
 
-1. Write a node.JS program with TypeScript that gets from the command line numeric parameter - frequency.
+1. Write a node.JS program with TypeScript that gets from the command line numeric parameter - frequency in seconds.
 Program should print every tick (defined by frequency) next system information:
     ```
     - operating system
@@ -18,7 +18,15 @@ Program should print every tick (defined by frequency) next system information:
     - total memory, used memory, free memory in GBs
     - if system has, battery info (charging, percent, remaining time)
     ```
+2. Write your own implementation of `EventEmitter` class (_Publisher/Subscriber_).
+It should behave like the following:
+   ```js
+   const emitter = new MyEventEmitter();
 
+   emitter.registerHandler('usedUpdated', () => console.log('User was updated'));
+   
+   emitter.emitEvent('usedUpdated'); // User was updated
+   ```
 
 
 ### Useful links:
@@ -27,6 +35,8 @@ Program should print every tick (defined by frequency) next system information:
 [Node.js tutorial](https://nodejs.dev/learn)
 
 [Node.js basics course](https://metanit.com/web/nodejs/)
+
+[Blocking vs Non-Blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/)
 
 [Node.js URL docs](https://nodejs.org/docs/latest-v14.x/api/url.html)
 
