@@ -1,21 +1,21 @@
 // Generate v4 UUIDs without needing the uuid library
-// import * as crypto from 'crypto';
-//
-// const itemId = crypto.randomUUID();
-//
-// console.log(itemId);
+import * as crypto from 'crypto';
+
+const itemId = crypto.randomUUID();
+
+console.log(itemId);
 
 
 
 
 // New promise-based APIs in Node.js
-// import { setTimeout } from 'timers/promises';
-//
-// (async () => {
-//   const delayedValue = await setTimeout(1000, '1 minute later');
-//
-//   console.log(delayedValue);
-// })();
+import { setTimeout } from 'timers/promises';
+
+(async () => {
+  const delayedValue = await setTimeout(3000, '1 minute later');
+
+  console.log(delayedValue);
+})();
 
 
 

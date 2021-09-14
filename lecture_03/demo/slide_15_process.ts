@@ -5,4 +5,4 @@ if (_process.argv.length > 0) {
 }
 
 // provide an access to environment variables
-// console.log(_process.env.PARAM);
+console.log(_process.env.PARAM);
