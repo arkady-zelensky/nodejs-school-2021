@@ -8,4 +8,4 @@
 
 ### 3. [Node.js basics](lecture_03/readme.md)
 
-### 4. OOP, Architectures (basic)
+### 4. [OOP, Architectures (basic)](lecture_04/readme.md)
