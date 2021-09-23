@@ -1,0 +1,34 @@
+{
+  "name": "nodejs-school",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "koa": "ts-node koa/index.ts"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-morgan": "^1.0.1",
+    "koa-qs": "^3.0.0",
+    "koa-router": "^10.0.0",
+    "koa-session": "^6.2.0",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.2.1",
+    "@types/koa-morgan": "^1.0.4",
+    "@types/koa-qs": "^2.0.0",
+    "@types/koa-router": "^7.0.37",
+    "@types/koa-session": "^5.10.3",
+    "@types/lodash": "^4.14.173",
+    "@types/node": "^16.4.3",
+    "@types/uuid": "^8.3.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}
