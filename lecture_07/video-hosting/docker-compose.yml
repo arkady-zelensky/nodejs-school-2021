@@ -19,8 +19,33 @@ services:
     # to save data between restarts
     volumes:
       - postgresvol:/var/lib/postgresql/data
+    networks:
+      - videohostingdb
 
-# todo pgadmin
+
+  pgadmin:
+    container_name: nodejs_school_videohosting_admin
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - videohostingdb
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadminvol:/var/lib/pgadmin
+    networks:
+      - videohostingdb
+
+
+networks:
+  videohostingdb:
+    driver: bridge
+
 
 volumes:
   postgresvol:
+  pgadminvol:
