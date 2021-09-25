@@ -9,14 +9,14 @@ services:
     ports:
       - '${PG_PORT}:5432'
     expose:
-      # Opens port 3306 on the container
-      - ${PG_PORT}
+      - '${PG_PORT}'
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_DB: ${PG_DATABASE}
       PG_DATA: /var/lib/postgresql/data
     restart: always
+    # to save data between restarts
     volumes:
       - postgresvol:/var/lib/postgresql/data
 
