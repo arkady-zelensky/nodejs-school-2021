@@ -2,6 +2,7 @@
 **/node_modules
 **/.build
 **/logs
+**/.env
 
 # compiled output
 /dist

@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  videohostingdb:
+    container_name: nodejs_school_videohosting_db
+    image: postgres:12
+    env_file:
+      - .env
+    ports:
+      - '${PG_PORT}:5432'
+    expose:
+      # Opens port 3306 on the container
+      - ${PG_PORT}
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DATABASE}
+      PG_DATA: /var/lib/postgresql/data
+    restart: always
+    volumes:
+      - postgresvol:/var/lib/postgresql/data
+
+# todo pgadmin
+
+volumes:
+  postgresvol:
