@@ -50,6 +50,6 @@ CREATE TABLE IF NOT EXISTS likes (
     video_id UUID REFERENCES videos (id),
     user_id UUID REFERENCES users (id),
     positive BOOLEAN DEFAULT TRUE,
-    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (video_id, user_id)
 );
