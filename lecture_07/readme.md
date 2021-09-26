@@ -60,12 +60,6 @@ Subscriptions (User M:M Channel)
 - SubscriptionLevel
 - d:subscribe_date
 
-SubscriptionLevels (Subscriptions 1:M SubscriptionLevels)
-- name
-- rate
-- color
-- price
-
 Videos (Channel 1:M Videos)
 - s:preview_url
 - s:file_url
@@ -87,18 +81,6 @@ Watches (Watches 1:1 Video, Watches 1:1 User)
 - ^user
 - ^video
 - d:date
-- n:duration
-
-Playlists
-- ^user
-- s:name
-- s:description
-- b:public
-
-PlaylistsVideo
-- ^playlist
-- video
-
 
 
 ### Useful links:

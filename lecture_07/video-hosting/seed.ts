@@ -3,7 +3,7 @@ import * as faker from 'faker';
 import {configService} from "./src/shared/config.service";
 import {shuffle} from "./src/shared/utils";
 
-const table: string = 'subscriptions';
+const table: string = 'comments';
 
 (async () => {
   const conn = await createConnection(configService.getTypeOrmConfig());
@@ -35,6 +35,26 @@ const table: string = 'subscriptions';
         await runner.query(`insert into subscriptions (channel_id, user_id, level, subscribed_at) values ($1, $2, $3, $4)`, [channels[i].id, user.id, level, subscribed_at]);
       }
     }
+  }
+  else if (table === 'comments') {
+    const users = await runner.query(`select * from users`);
+    const videos = await runner.query(`select * from videos`);
+    const usersCount = Math.round(users.length / 10);
+    for (let i = 0; i < usersCount; i++) {
+      const videosCount = faker.datatype.number({min: 1, max: Math.round(videos.length / 10)});
+      shuffle(videos);
+      for (let j = 0; j < videosCount; j++) {
+        const commentsCount = faker.datatype.number({min: 1, max: 3});
+        for (let k = 0; k < commentsCount; k++) {
+          const created_at = faker.datatype.datetime({min: +new Date() - 200 * 24 * 60 * 60 * 1000, max: +new Date()});
+          const text = faker.lorem.sentence(10);
+          await runner.query(`insert into comments (video_id, user_id, text, created_at) values ($1, $2, $3, $4)`, [videos[j].id, users[i].id, text, created_at]);
+        }
+
+      }
+
+    }
+
   }
 
   await conn.close();

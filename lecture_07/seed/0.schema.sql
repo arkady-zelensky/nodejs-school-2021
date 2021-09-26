@@ -1,3 +1,7 @@
+-- adding UUID support
+SELECT * FROM pg_available_extensions;
+CREATE EXTENSION IF NOT EXISTS  "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS users (
     id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(30) NOT NULL,
@@ -26,11 +30,26 @@ CREATE TABLE IF NOT EXISTS videos (
     published_at DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
-
 CREATE TABLE IF NOT EXISTS subscriptions (
     id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     channel_id UUID REFERENCES channels (id),
     user_id UUID REFERENCES users (id),
     level VARCHAR(50) NOT NULL DEFAULT 'standard',
     subscribed_at DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+    id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    video_id UUID REFERENCES videos (id),
+    user_id UUID REFERENCES users (id),
+    text VARCHAR(200) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS likes (
+    video_id UUID REFERENCES videos (id),
+    user_id UUID REFERENCES users (id),
+    positive BOOLEAN DEFAULT TRUE,
+    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    PRIMARY KEY (video_id, user_id)
 );
