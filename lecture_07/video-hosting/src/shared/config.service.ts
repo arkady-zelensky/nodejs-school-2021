@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions';
 require('dotenv').config();
 
 class ConfigService {
@@ -27,7 +28,7 @@ class ConfigService {
     return mode != 'DEV';
   }
 
-  public getTypeOrmConfig(): TypeOrmModuleOptions {
+  public getTypeOrmConfig(): ConnectionOptions {
     return {
       type: 'postgres',
       host: this.getValue('PG_HOST'),
