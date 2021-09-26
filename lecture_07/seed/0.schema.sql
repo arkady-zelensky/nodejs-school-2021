@@ -25,3 +25,12 @@ CREATE TABLE IF NOT EXISTS videos (
     duration bigint NOT NULL,
     published_at DATE NOT NULL DEFAULT CURRENT_DATE
 );
+
+
+CREATE TABLE IF NOT EXISTS subscriptions (
+    id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    channel_id UUID REFERENCES channels (id),
+    user_id UUID REFERENCES users (id),
+    level VARCHAR(50) NOT NULL DEFAULT 'standard',
+    subscribed_at DATE NOT NULL DEFAULT CURRENT_DATE
+);
