@@ -33,6 +33,8 @@
 ### Useful links:
 [Database design](https://metanit.com/sql/tutorial/1.1.php)
 
+[PostgreSQL tutorial](https://metanit.com/sql/postgresql/1.1.php)
+
 [SQL joins (+ comments)](https://habr.com/ru/post/448072/)
 
 [Normalization forms](https://www.guru99.com/database-normalization.html)
