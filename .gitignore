@@ -3,6 +3,7 @@
 **/.build
 **/logs
 **/.env
+**/query.sql
 
 # compiled output
 **/dist
