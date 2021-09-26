@@ -2,86 +2,33 @@
 
 ### :house: Home task
 
-0. Write an `add()` function that will take any number of parameters in the next manner:
-   ```js
-   console.log(add(2)(5)(7)(1)(6)(5)(10)()); // 36
-1. Write function, which takes two strings, and returns true if they are anagrams of one another.
-2. Write the clone function so that it can clone deeply the object passed as a parameter.
-3. Write a function-wrapper, that will cache the result of any other function.
-   Look at the example of use case in pseudocode:
-   ```js
-   const add = (a, b) => a+b;
-   const wrapper = (args) => {
-     // implementation
-   };
-   const cachedAdd = wrapper(add);
-   cachedAdd(2,2); // 4 calculated
-   cachedAdd(5,8); // 13 calculated
-   cachedAdd(2,2); // 4 from cache
-   ```
+
+0. Write an SQL statement to define tables for the next entities:
+   - Concerts (name, duration, description, address, age limit, price)
+   - Visitors (email, name, age)
+   - Categories (name, description).
    
-Task 0
-Categories
-- name
-- description
+   Notes:
+   
+   One concert may be related to different categories.
+   
+1. Select all users with theirs channels and return next information, sorted by channel's creation date (newer at the top):
 
-Concerts
-- name
-- duration
-- description
-- address
-- category
-- age limit
+   user id, user name, user avatar, channel photo, channel description, channel creation date.
+2. Select information about the most liked video ever.
+3. Select videos from subscriptions for user Stephanie Bulger, ordered by publish date (newer at the top) and return next information:
 
-Category_Concerts
-- ^category
-- ^concert
+   video id, video title, video preview, video duration, video publish date.
+4. Select information of channel with id '79f6ce8f-ee0c-4ef5-9c36-da06b7f4cb76' and count of its subscribers.
+5. Select the most rated (likes and dislikes) top 10 videos starting from the September which has more than 4 likes, sorted by count of likes (the most at the top).
+6. Select subscriptions for user Ennis Haestier and return next information:
 
-Visitors (Concerts 1:M Visitors)
-- email
-- name
-- age
+   channel (user) name, channel (user) avatar, channel photo, channel description, subscription level, subscription date.
 
-Task 1
-________________________________
-Users
-- s:email
-- s:name
-- s:avatar_url
-- s:gender
+   Information should be sorted firstly by subscription level and secondly by subscription date:
 
-Channels (User 1:1 Channel)
-- s:photo_url
-- s:description
-
-Subscriptions (User M:M Channel)
-- user
-- channel
-- SubscriptionLevel
-- d:subscribe_date
-
-Videos (Channel 1:M Videos)
-- s:preview_url
-- s:file_url
-- s:title
-- s:description
-- n:duration
-
-Comments (Videos 1:M Comments, User 1:M Comments)
-- ^user
-- ^video
-- s:text
-
-Reactions (Reactions 1:1 Video, Reactions 1:1 User)
-- ^user
-- ^video
-- s:isLike
-
-Watches (Watches 1:1 Video, Watches 1:1 User)
-- ^user
-- ^video
-- d:date
-
+   order for subscription levels from top to bottom: vip, follower, fan, standard; subscription date from newer to older.
+   
 
 ### Useful links:
 [Database design](https://metanit.com/sql/tutorial/1.1.php)
