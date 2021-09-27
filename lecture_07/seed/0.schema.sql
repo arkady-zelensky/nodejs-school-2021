@@ -1,6 +1,6 @@
 -- adding UUID support
 SELECT * FROM pg_available_extensions;
-CREATE EXTENSION IF NOT EXISTS  "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS users (
     id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS channels (
     id UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users (id),
-    description VARCHAR(100) NOT NULL ,
-    photo_url VARCHAR(80) NOT NULL ,
+    description VARCHAR(100) NOT NULL,
+    photo_url VARCHAR(80) NOT NULL,
     created_at DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
