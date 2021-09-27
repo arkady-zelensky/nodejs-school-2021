@@ -22,6 +22,26 @@ services:
     networks:
       - videohostingdb
 
+  exampledb:
+    container_name: nodejs_school_example_db
+    image: postgres:12
+    env_file:
+      - .env
+    ports:
+      - '5556:5432'
+    expose:
+      - '5556'
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: exampledb
+      PG_DATA: /var/lib/postgresql/data
+    restart: always
+    # to save data between restarts
+    volumes:
+      - exampledbvol:/var/lib/postgresql/data
+    networks:
+      - exampledb
 
   pgadmin:
     container_name: nodejs_school_videohosting_admin
@@ -44,8 +64,11 @@ services:
 networks:
   videohostingdb:
     driver: bridge
+  exampledb:
+    driver: bridge
 
 
 volumes:
   postgresvol:
   pgadminvol:
+  exampledbvol:
