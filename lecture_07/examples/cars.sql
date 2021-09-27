@@ -2,7 +2,7 @@ create table cars (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     make VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
-    year INT NOT NULL,
+    year INT NOT NULL CHECK(year > 1960),
     city VARCHAR(50) NOT NULL,
     color VARCHAR(50),
     vin VARCHAR(50) NOT NULL,
