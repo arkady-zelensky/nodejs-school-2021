@@ -15,7 +15,7 @@
 1. Select all users with theirs channels and return next information, sorted by channel's creation date (newer at the top):
 
    user id, user name, user avatar, channel photo, channel description, channel creation date.
-2. Select information about the most liked video ever.
+2. Select information about 5 the most liked videos ever.
 3. Select videos from subscriptions for user Stephanie Bulger, ordered by publish date (newer at the top) and return next information:
 
    video id, video title, video preview, video duration, video publish date.
