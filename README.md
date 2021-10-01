@@ -11,3 +11,5 @@
 ### 4. [OOP, Architectures (basic)](lecture_04/readme.md)
 
 ### 7. [Databases, SQL](lecture_07/readme.md)
+
+### 8. [NoSql Databases](lecture_08/readme.md)
