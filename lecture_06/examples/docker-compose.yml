@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  nodejs_school_db:
+    image: mongo:latest
+    container_name: nodejs_school_db
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - nodejs_school_db:/data/db
+    ports:
+      - 27017:27017
+
+  nodejs_school_api:
+    image: nodejs_school_api
+    container_name: nodejs_school_api
+    environment:
+      - DB_HOST=nodejs_school_db
+    build:
+      context: .
+      dockerfile: src/Dockerfile
+    depends_on:
+      - nodejs_school_db
+    ports:
+      - '3000:3000'
+
+volumes:
+  nodejs_school_db:
