@@ -1,0 +1,10 @@
+{
+  "name": "nodejs-school-advanced",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.10.3",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
