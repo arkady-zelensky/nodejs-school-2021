@@ -1,9 +1,9 @@
 export class UserMapper {
   public static toDTO(userEntity: UserEntity): DSUserDTO {
-    const { firstName, practitionerEntityId, lastName } = userEntity;
+    const { firstName, userEntityId, lastName } = userEntity;
 
     return {
-      id: practitionerEntityId,
+      id: userEntityId,
       firstName,
       lastName,
     };
@@ -24,7 +24,7 @@ export class UserMapper {
     const { id, lastName, firstName } = updateData;
 
     return {
-      practitionerEntityId: id,
+      userEntityId: id,
       firstName,
       lastName,
     };
