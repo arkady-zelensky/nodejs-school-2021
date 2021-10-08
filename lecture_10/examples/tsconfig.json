@@ -10,5 +10,5 @@
     "incremental": true,
     "outDir": "./dist"
   },
-  "include": ["./src/**/*"]
+  "include": ["./*", "./workers"]
 }

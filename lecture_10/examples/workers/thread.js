@@ -1,9 +1,11 @@
-const { workerData, parentPort } = require('worker_threads');
+const { workerData, parentPort } = require("worker_threads");
 
 function main(data) {
   console.log(data);
-
-  return 0;
 }
 
+console.log(process.pid);
+
+parentPort.postMessage(main(workerData));
+parentPort.postMessage(main(workerData));
 parentPort.postMessage(main(workerData));

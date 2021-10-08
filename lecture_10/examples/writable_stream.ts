@@ -1,8 +1,10 @@
-import { Readable, Writable } from 'stream';
+import { Readable, Writable } from "stream";
 
 class CustomWritable extends Writable {
   private fileSizeInBytes: number = 16 * 1024 * 1024;
   private simulatedSpeed: number = 1024 * 1024;
+
+  private chunkIndex = 0;
 
   constructor() {
     super();
@@ -11,8 +13,10 @@ class CustomWritable extends Writable {
   public _write(
     chunk: Buffer,
     encoding: string,
-    callback: (error?: Error) => void,
+    callback: (error?: Error) => void
   ) {
+    console.log(this.chunkIndex++);
+
     if (this.fileSizeInBytes > 0) {
       this.fileSizeInBytes -= chunk.length;
 
@@ -20,10 +24,10 @@ class CustomWritable extends Writable {
         ? callback()
         : setTimeout(
             callback,
-            ((1000 / this.simulatedSpeed) * chunk.length) / 1024,
+            ((1000 / this.simulatedSpeed) * chunk.length) / 1024
           );
     } else {
-      callback(new Error('bad_data'));
+      callback(new Error("bad_data"));
     }
   }
 
@@ -31,7 +35,7 @@ class CustomWritable extends Writable {
     if (this.fileSizeInBytes === 0) {
       callback();
     } else {
-      callback(new Error('bad_data'));
+      callback(new Error("bad_data"));
     }
   }
 }
@@ -44,8 +48,8 @@ class CustomWritable extends Writable {
   readStream.pipe(writeStream);
 
   await new Promise((resolve) => {
-    writeStream.on('finish', resolve);
+    writeStream.on("finish", resolve);
   });
 
-  console.log('done');
+  console.log("done");
 })();

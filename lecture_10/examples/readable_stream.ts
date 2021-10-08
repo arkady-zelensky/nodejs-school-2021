@@ -1,5 +1,5 @@
-import { Readable } from 'stream';
-import * as fs from 'fs';
+import { Readable } from "stream";
+import * as fs from "fs";
 
 class CustomReadable extends Readable {
   private fileSizeInBytes: number = 16 * 1024 * 1024;
@@ -25,7 +25,7 @@ class CustomReadable extends Readable {
         ? this._pushBytes(bytes)
         : setTimeout(
             () => this._pushBytes(bytes),
-            ((1000 / this.simulatedSpeed) * bytes) / 1024,
+            ((1000 / this.simulatedSpeed) * bytes) / 1024
           );
     } else {
       this.push(null);
@@ -36,13 +36,13 @@ class CustomReadable extends Readable {
 (async () => {
   const readStream = new CustomReadable();
 
-  const writeStream = fs.createWriteStream('./write_stream.bin');
+  const writeStream = fs.createWriteStream("./write_stream.bin");
 
   readStream.pipe(writeStream);
 
   await new Promise((resolve) => {
-    writeStream.on('finish', resolve);
+    writeStream.on("finish", resolve);
   });
 
-  console.log('done');
+  console.log("done");
 })();
