@@ -1,4 +1,4 @@
-# Lecture 9
+# Lecture 10
 
 1. create functionality for user that provide ability to upload videos via HTTP.
    Videos should be stored in static folder.
