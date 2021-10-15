@@ -1,18 +1,14 @@
-import {CacheModule, Module} from '@nestjs/common';
+import { Module} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from './shared/config.service';
-import * as redisStore from 'cache-manager-redis-store';
+import { ChannelsModule } from './channels/channels.module';
 
 @Module({
   imports: [
-    CacheModule.register({
-      store: redisStore,
-      host: 'localhost',
-      port: 6379
-    }),
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig())
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+    ChannelsModule
   ],
   controllers: [AppController],
   providers: [AppService],
