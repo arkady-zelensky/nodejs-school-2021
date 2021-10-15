@@ -1,5 +1,7 @@
 import {Controller, Get, Param} from '@nestjs/common';
 import { ChannelsService } from "./channels.service";
+import {ChannelDto, ChannelId} from "./dtos/channel.dto";
+import {ApiResponse} from "@nestjs/swagger";
 
 @Controller('channels')
 export class ChannelsController {
@@ -9,12 +11,14 @@ export class ChannelsController {
   }
 
   @Get()
-  public async getAllChannels() {
+  @ApiResponse({type: ChannelDto, isArray: true})
+  public async getAllChannels(): Promise<ChannelDto[]> {
     return this.channelsService.getAll();
   }
 
   @Get(':id')
-  public async getOneChannel(@Param('id') id) {
+  @ApiResponse({type: ChannelDto})
+  public async getOneChannel(@Param('id') id: ChannelId): Promise<ChannelDto> {
     return this.channelsService.getOne(id);
   }
 }

@@ -10,12 +10,12 @@ import {NotFoundException} from "@nestjs/common";
 export class ChannelsRepository extends Repository<ChannelEntity> implements IChannelsRepository {
 
   public async getAll(): Promise<ChannelDto[]> {
-    const entities = await super.find();
+    const entities = await this.find();
     return entities.map(e => ChannelMapper.mapEntityToDTO(e));
   }
 
   public async getOne(id: ChannelId, options?: FindOneOptions<ChannelEntity>): Promise<ChannelDto> {
-    const entity = await super.findOne(id, options);
+    const entity = await this.findOne(id, options);
     if (!entity) {
       throw new NotFoundException(`Channel not found`);
     }
