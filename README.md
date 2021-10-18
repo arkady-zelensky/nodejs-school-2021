@@ -13,3 +13,5 @@
 ### 7. [Databases, SQL](lecture_07/readme.md)
 
 ### 8. [NoSql Databases](lecture_08/readme.md)
+
+### 12. [Writing tests](lecture_12/readme.md)
