@@ -22,3 +22,5 @@
 [Unit tests vs integration tests](https://www.softwaretestingclass.com/what-is-difference-between-unit-testing-and-integration-testing/)
 
 [Cucumber.js docs](https://cucumber.io/docs/guides/)
+
+[Value objects](https://khalilstemmler.com/articles/typescript-value-object/)
