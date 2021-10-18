@@ -1,6 +1,7 @@
-import { Injectable} from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import {ChannelsRepository} from "./channels.repository";
 import {ChannelDto, ChannelId} from "./dtos/channel.dto";
+import {sleep} from "../shared/utils";
 
 @Injectable()
 export class ChannelsService {
@@ -14,6 +15,8 @@ export class ChannelsService {
   }
 
   public async getOne(id: ChannelId): Promise<ChannelDto> {
-    return this.repository.getOne(id);
+    const dto = await this.repository.getOne(id);
+    await sleep(100); // imitation of work
+    return dto;
   }
 }
