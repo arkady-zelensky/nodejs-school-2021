@@ -43,7 +43,8 @@ export class ConfigService {
       },
       synchronize: false,
       migrationsRun: false,
-      ssl: this.isProduction(),
+      ssl: true,
+      // ssl: this.isProduction(),
     };
   }
 }

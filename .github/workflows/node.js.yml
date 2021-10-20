@@ -45,7 +45,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # fetch all git history
       - name: Heroku login credentials
         run: |
           cat > ~/.netrc <<EOF
@@ -70,6 +70,7 @@ jobs:
           heroku config:set PG_USER=${{ secrets.DEV_PG_USER }}
           heroku config:set PG_PASSWORD=${{ secrets.DEV_PG_PASSWORD }}
           heroku config:set PG_DATABASE=${{ secrets.DEV_PG_DATABASE }}
+          heroku config:set NODE_ENV=${{ secrets.DEV_NODE_ENV }}
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           git add .
