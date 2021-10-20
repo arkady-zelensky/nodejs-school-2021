@@ -38,66 +38,29 @@ jobs:
 #        cd lecture_13/video-hosting
 #        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
 #        npm run test:cov
-  deploy:
-    needs: build_and_test
+  deploy-staging:
     runs-on: ubuntu-latest
+    needs: build_and_test
+#    if: github.ref == 'refs/heads/develop'
     steps:
-      - name: Test
-        env:
-          TEST_GITHUB_TOKEN: ${{ secrets.HEROKU_APP_NAME }}
-          TEST_SECRET: ${{ secrets.HEROKU_EMAIL }}
-          TEST_SECRET111: "todooo"
-        run: |
-          echo ${#TEST_GITHUB_TOKEN}
-          echo ${#TEST_SECRET}
-          echo ${TEST_SECRET111}
-#      - name: test env vars 0
-#        run: echo ${{secrets.HEROKU_APP_NAME}}
-#      - name: test env vars 1
-#        run: echo "${{secrets.HEROKU_APP_NAME}}"
-#      - name: test env vars 2
-#        run: echo $HEROKU_APP_NAME
-#        env:
-#          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-#      - name: test env vars 3
-#        run: echo "$HEROKU_APP_NAME"
-#        env:
-#          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-      - name: Check out repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
-        env:
-          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-          HEROKU_EMAIL: ${{secrets.HEROKU_EMAIL}}
-
-      - name: Add Heroku remote
-        env:
-          HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
-        run: heroku git:remote --app nodejs-video-hosting
-
-      - name: Push to Heroku
+      - uses: actions/checkout@v2
+      # possibly setup node action here...
+      # possibly cache of node modules action here...
+      # build steps here...
+      - name: Build to deploy
         run: |
           cd lecture_13/video-hosting
+          npm install
+          npm run build
+      - name: Verify
+        run: |
           ls -la
-          git status
-          git push heroku master
-
-#      - uses: akhileshns/heroku-deploy@v3.12.12
+          cd lecture_13/video-hosting
+          ls -la
+#      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.1.0
 #        with:
-#          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-#          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-#          heroku_email: ${{secrets.HEROKU_EMAIL}}
-#          appdir: lecture_13/video-hosting
-#          region: eu
+#          api_key: ${{secrets.HEROKU_API_KEY}}
+#          email: ${{secrets.HEROKU_EMAIL}}
+#          app_name: nodejs-video-hosting
+#          heroku_branch: "master"
+#          subfolder: "lecture_13/video-hosting"
