@@ -54,8 +54,8 @@ jobs:
           npm run build
       - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.1.0
         with:
-          api_key: ${{secrets.HEROKU_API_KEY}}
-          email: ${{secrets.HEROKU_EMAIL}}
+          api_key: "f1f752d1-ac75-40c2-87e8-48fd1ada2e8e"
+          email: "arkady.zelensky@yalantis.net"
           app_name: nodejs-video-hosting
           heroku_branch: "master"
           subfolder: "lecture_13/video-hosting/dist"
