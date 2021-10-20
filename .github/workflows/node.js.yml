@@ -9,36 +9,34 @@ on:
       - lecture*
 
 jobs:
-# todo disabled for testing
-#  build_and_test:
-#    runs-on: ubuntu-latest
-#
-#    strategy:
-#      matrix:
-#        node-version:
-#          - 14.16.1
-##        - 16.x
-#
-#    steps:
-#    - uses: actions/checkout@v2
-#
-#    - name: Use Node.js ${{ matrix.node-version }}
-#      uses: actions/setup-node@v2
-#      with:
-#        node-version: ${{ matrix.node-version }}
-#
-#    - name: Build
-#      run: |
-#        cd lecture_13/video-hosting
-#        npm install
-#        npm run build
+  build_and_test:
+    runs-on: ubuntu-latest
 
-# todo disabled for testing
-#    - name: Test
-#      run: |
-#        cd lecture_13/video-hosting
-#        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
-#        npm run test:cov
+    strategy:
+      matrix:
+        node-version:
+          - 14.16.1
+#        - 16.x
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        cd lecture_13/video-hosting
+        npm install
+        npm run build
+
+    - name: Test
+      run: |
+        cd lecture_13/video-hosting
+        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
+        npm run test:cov
   custom-deploy:
     runs-on: ubuntu-latest
     steps:
