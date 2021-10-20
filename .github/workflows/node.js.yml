@@ -1,6 +1,5 @@
 name: NodeJS
 
-
 on:
   push:
     branches: [ main, lecture* ]
@@ -10,7 +9,7 @@ on:
       - lecture*
 
 jobs:
-  "build and-test":
+  build_and_test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -36,4 +35,5 @@ jobs:
     - name: Test
       run: |
         cd lecture_13/video-hosting
+        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
         npm run test:cov
