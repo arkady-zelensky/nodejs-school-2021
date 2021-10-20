@@ -10,15 +10,11 @@ describe('utils', () => {
   });
 
   it('shuffle: should return array with different order of items', () => {
-    const input = [1, 2 , 3, 4, 5];
+    const input = [1, 2, 3, 4, 5];
 
-    const result = shuffle([...input]);
+    const shuffled = shuffle([...input]);
 
-    let changed = 0;
-    for (const num of input) {
-      changed += +(input.indexOf(num) !== result.indexOf(num));
-    }
-
-    expect(changed).toBeGreaterThan(0);
+    expect(input).not.toEqual(shuffled);
+    expect(input.sort()).toEqual(shuffled.sort());
   });
 });
