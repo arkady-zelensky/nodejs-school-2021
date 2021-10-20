@@ -52,15 +52,10 @@ jobs:
           cd lecture_13/video-hosting
           npm install
           npm run build
-      - name: Verify
-        run: |
-          ls -la
-          cd lecture_13/video-hosting
-          ls -la
-#      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.1.0
-#        with:
-#          api_key: ${{secrets.HEROKU_API_KEY}}
-#          email: ${{secrets.HEROKU_EMAIL}}
-#          app_name: nodejs-video-hosting
-#          heroku_branch: "master"
-#          subfolder: "lecture_13/video-hosting"
+      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.1.0
+        with:
+          api_key: ${{secrets.HEROKU_API_KEY}}
+          email: ${{secrets.HEROKU_EMAIL}}
+          app_name: nodejs-video-hosting
+          heroku_branch: "master"
+          subfolder: "lecture_13/video-hosting/dist"
