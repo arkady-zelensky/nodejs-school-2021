@@ -44,7 +44,6 @@ export class ConfigService {
       synchronize: false,
       migrationsRun: false,
       ssl: true,
-      // ssl: this.isProduction(),
     };
   }
 }

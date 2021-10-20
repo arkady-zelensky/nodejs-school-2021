@@ -74,5 +74,5 @@ jobs:
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           git add .
-          git commit -m "some commit" --amend
+          git commit -m "added package.json" --amend
           git push heroku `git subtree split --prefix lecture_13/video-hosting HEAD`:master --force
