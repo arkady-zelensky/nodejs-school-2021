@@ -2,6 +2,7 @@
 **/node_modules
 **/.build
 **/logs
+**/coverage
 **/.env
 **/query.sql
 lecture_07/video-hosting/docker-compose.yml
