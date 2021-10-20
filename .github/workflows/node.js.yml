@@ -32,11 +32,12 @@ jobs:
         npm install
         npm run build
 
-    - name: Test
-      run: |
-        cd lecture_13/video-hosting
-        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
-        npm run test:cov
+# todo disabled for testing
+#    - name: Test
+#      run: |
+#        cd lecture_13/video-hosting
+#        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
+#        npm run test:cov
   deploy:
     needs: build_and_test
     runs-on: ubuntu-latest
@@ -89,6 +90,8 @@ jobs:
       - name: Push to Heroku
         run: |
           cd lecture_13/video-hosting
+          ls -la
+          git status
           git push heroku master
 
 #      - uses: akhileshns/heroku-deploy@v3.12.12

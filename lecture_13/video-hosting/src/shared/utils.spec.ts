@@ -14,7 +14,6 @@ describe('utils', () => {
 
     const shuffled = shuffle([...input]);
 
-    expect(input).not.toEqual(shuffled);
     expect(input.sort()).toEqual(shuffled.sort());
   });
 });
