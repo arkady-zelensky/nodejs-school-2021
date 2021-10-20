@@ -4,7 +4,6 @@ import {IChannelsRepository} from "./types/channels-repository.interface";
 import {ChannelMapper} from "./mappers/channel.mapper";
 import {ChannelDto, ChannelId} from "./dtos/channel.dto";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
-import {NotFoundException} from "@nestjs/common";
 import {ChannelNotFound} from "./channel-not-found";
 
 @EntityRepository(ChannelEntity)

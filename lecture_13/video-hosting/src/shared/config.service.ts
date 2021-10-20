@@ -1,8 +1,7 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions';
 require('dotenv').config();
 
-class ConfigService {
+export class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
 
   private getValue(key: string, throwOnMissing = true): string {
