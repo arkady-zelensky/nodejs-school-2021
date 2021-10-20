@@ -65,19 +65,11 @@ jobs:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       - name: Push to Heroku
         run: |
-          cd lecture_13/video-hosting
-          npm install
-          npm run build
-          cp package.json dist/package.json
-          cp Procfile dist/Procfile
-          cd ..
-          cd ..
-          ls -la
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           git add .
-          git commit -m "added package.json"
-          git subtree push --prefix=lecture_13/video-hosting/dist heroku HEAD:master
+          git commit -m "added package.json" --amend
+          git push heroku `git subtree split --prefix lecture_13/video-hosting HEAD`:master --force
 
 #  deploy_akhileshns:
 #    runs-on: ubuntu-latest
