@@ -15,3 +15,5 @@
 ### 8. [NoSql Databases](lecture_08/readme.md)
 
 ### 12. [Writing tests](lecture_12/readme.md)
+
+### 13. [CI/CD](lecture_13/readme.md)
