@@ -9,28 +9,29 @@ on:
       - lecture*
 
 jobs:
-  build_and_test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version:
-          - 14.16.1
-#        - 16.x
-    
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Build
-      run: |
-        cd lecture_13/video-hosting
-        npm install
-        npm run build
+  # todo disabled for testing
+#  build_and_test:
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node-version:
+#          - 14.16.1
+##        - 16.x
+#
+#    steps:
+#    - uses: actions/checkout@v2
+#
+#    - name: Use Node.js ${{ matrix.node-version }}
+#      uses: actions/setup-node@v2
+#      with:
+#        node-version: ${{ matrix.node-version }}
+#
+#    - name: Build
+#      run: |
+#        cd lecture_13/video-hosting
+#        npm install
+#        npm run build
 
 # todo disabled for testing
 #    - name: Test
@@ -38,27 +39,76 @@ jobs:
 #        cd lecture_13/video-hosting
 #        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
 #        npm run test:cov
-  build:
+  custom-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Login to Heroku Container registry
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-      - name: Build and push
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      - name: Add Heroku remote
+        run: heroku git:remote --app $HEROKU_APP_NAME
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      - name: Push to Heroku
         run: |
           cd lecture_13/video-hosting
-          heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
+          npm install
+          npm run build
+          cp package.json dist/package.json
+          cp Procfile dist/Procfile
+          cd ..
+          cd ..
+          ls -la
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git add .
+          git commit -m "added package.json"
+          git subtree push --prefix=lecture_13/video-hosting/dist heroku HEAD:master
+
+#  deploy_akhileshns:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+#        with:
+#          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+#          heroku_email: ${{secrets.HEROKU_EMAIL}}
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Login to Heroku Container registry
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#        run: heroku container:login
+#      - name: Build and push
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#        run: |
+#          cd lecture_13/video-hosting
+#          heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
+#      - name: Release
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
 #  deploy-staging:
 #    runs-on: ubuntu-latest
-#    needs: build_and_test
+##    needs: build_and_test
 #    steps:
 #      - uses: actions/checkout@v2
 #      - name: Build to deploy
