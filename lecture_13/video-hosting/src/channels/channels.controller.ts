@@ -16,9 +16,9 @@ export class ChannelsController {
     return this.channelsService.getAll();
   }
 
-  @Get(':id')
-  @ApiResponse({type: ChannelDto})
-  public async getOneChannel(@Param('id') id: ChannelId): Promise<ChannelDto> {
-    return this.channelsService.getOne(id);
-  }
+  // @Get(':id')
+  // @ApiResponse({type: ChannelDto})
+  // public async getOneChannel(@Param('id') id: ChannelId): Promise<ChannelDto> {
+  //   return this.channelsService.getOne(id);
+  // }
 }
