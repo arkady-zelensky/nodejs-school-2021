@@ -36,7 +36,6 @@ jobs:
     - name: Unit tests
       run: |
         cd lecture_13/video-hosting
-        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
         npm run test:cov
 
 
