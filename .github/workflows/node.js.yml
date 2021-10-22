@@ -1,0 +1,93 @@
+name: NodeJS
+
+
+on:
+  push:
+    branches: [ main, lecture* ]
+  pull_request:
+    branches:
+      - main
+      - lecture*
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 14.16.1
+#        - 16.x
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Test heroku
+      run: |
+        heroku
+
+    - name: Build
+      run: |
+        cd lecture_13/video-hosting
+        npm install
+        npm run build
+
+    - name: Unit tests
+      run: |
+        cd lecture_13/video-hosting
+        PG_HOST='localhost' PG_PORT=1234 PG_USER=testuser PG_PASSWORD=pass PG_DATABASE=fakedb \
+        npm run test:cov
+
+
+#  custom_deploy:
+#    needs: build_and_test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Check out repository
+#        uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0 # fetch all git history
+#
+#      - name: Heroku login credentials
+#        run: |
+#          cat > ~/.netrc <<EOF
+#            machine api.heroku.com
+#              login $HEROKU_EMAIL
+#              password $HEROKU_API_KEY
+#            machine git.heroku.com
+#              login $HEROKU_EMAIL
+#              password $HEROKU_API_KEY
+#          EOF
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+#
+#      - name: Add Heroku remote
+#        run: heroku git:remote --app $HEROKU_APP_NAME
+#        env:
+#          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+#
+#      - name: Set config vars
+#        run: |
+#          heroku config:set PG_HOST=${{ secrets.DEV_PG_HOST }}
+#          heroku config:set PG_PORT=${{ secrets.DEV_PG_PORT }}
+#          heroku config:set PG_USER=${{ secrets.DEV_PG_USER }}
+#          heroku config:set PG_PASSWORD=${{ secrets.DEV_PG_PASSWORD }}
+#          heroku config:set PG_DATABASE=${{ secrets.DEV_PG_DATABASE }}
+#          heroku config:set NODE_ENV=${{ secrets.DEV_NODE_ENV }}
+#
+#      - name: Push to Heroku
+#        run: |
+#          git config --global user.email "you@example.com"
+#          git config --global user.name "Your Name"
+#          cat > lecture_13/video-hosting/Procfile << EOF
+#            web: NODE_TLS_REJECT_UNAUTHORIZED='0' npm run start:prod
+#          EOF
+#          git add .
+#          git commit -m "added Procfile" --amend
+#          git push heroku `git subtree split --prefix lecture_13/video-hosting HEAD`:master --force

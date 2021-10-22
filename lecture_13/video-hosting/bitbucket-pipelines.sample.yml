@@ -1,0 +1,94 @@
+image: node:14.16.1
+
+definitions:
+  services:
+    docker:
+      memory: 3076
+
+pipelines:
+  custom: # Pipelines that can only be triggered manually
+    production:
+      - step:
+          name: Install dependencies
+          size: 2x
+          caches:
+            - node
+          script:
+            - npm install
+
+  branches:
+    develop:
+      - step:
+          name: Run tests
+          size: 2x
+          caches:
+            - node
+          script:
+            - npm install
+            # read envs from file and set
+            - source set_env.sh
+            - export NODE_ENV=test
+            - npm run test:cov
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env.sh
+      - step:
+          name: Build & Deploy WisDM serverless create_domain
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g serverless@2.38.0
+            - source set_env.sh
+            - sls create_domain -c serverless.yml --stage dev
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env.sh
+      - step:
+          name: Build & Deploy WisDM serverless dynamodb
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g serverless@2.38.0
+            - source set_env.sh
+            - sls deploy -c serverless-dynamodb.yml --stage dev
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env.sh
+      - step:
+          name: Build & Deploy WisDM serverless-deploy
+          size: 2x # Double resources available for this step.
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g serverless@2.38.0
+            - source set_env.sh
+            - sls deploy -c serverless.yml --stage dev
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env.sh
+      - step:
+          name: Info serverless stage and Get Arn
+          caches:
+            - node
+          script:
+            - npm install
+            - npm install -g serverless@2.38.0
+            - source set_env.sh
+            - sls info --verbose --stage dev | tee $BITBUCKET_CLONE_DIR/.slsinfo
+          artifacts: # define the artifacts to be passed to each future step
+            - set_env.sh
+            - .slsinfo
+            - rdsVars.sh
+      - step:
+          name: Export outputs & run migrations
+          caches:
+            - node
+          script:
+            - source set_env.sh
+            - npm install
+            - npm run export:stack-outputs
+            - source rdsVars.sh
+            - npm run typeorm:migration:run
+          artifacts:
+            - set_env.sh
+            - .slsinfo
+            - rdsVars.sh
