@@ -16,7 +16,7 @@
   \*********************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.handler = void 0;\nconst handler = async (event, context) => {\n    return {\n        statusCode: 200,\n        body: JSON.stringify({\n            message: 'Hello from lambda!'\n        }),\n        headers: { 'Content-Type': 'application/json' }\n    };\n};\nexports.handler = handler;\n\n\n//# sourceURL=webpack://serverless-example/./src/main.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.handler = void 0;\nconst handler = async (event, context) => {\n    console.log('event');\n    console.log(event);\n    console.log('context');\n    console.log(context);\n    return {\n        statusCode: 200,\n        body: JSON.stringify({\n            message: `Hello from lambda ${process.env.SOMEVAR}!`\n        }),\n        headers: { 'Content-Type': 'application/json' }\n    };\n};\nexports.handler = handler;\n\n\n//# sourceURL=webpack://serverless-example/./src/main.ts?");
 
 /***/ })
 

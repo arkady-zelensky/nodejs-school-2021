@@ -7,6 +7,7 @@
 
 [Get AWS credentials](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)
 
+[Serverless AWS Lambda](https://www.serverless.com/framework/docs/providers/aws/guide/functions)
 
 [Serverless examples](https://github.com/serverless/examples)
 

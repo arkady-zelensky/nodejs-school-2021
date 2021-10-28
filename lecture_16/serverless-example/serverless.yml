@@ -9,6 +9,8 @@ provider:
   region: eu-central-1
   runtime: nodejs14.x
   stage: ${opt:stage, self:custom.defaultStage}
+  environment:
+    SOMEVAR: 12345
 
 package:
   individually: true
@@ -17,6 +19,7 @@ package:
 functions:
   mainHandler:
     handler: src/main.handler
+    timeout: 900 # 15 min
     events:
       - http:
           path: '/'
