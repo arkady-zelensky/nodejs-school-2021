@@ -9,7 +9,7 @@ lecture_07/video-hosting/docker-compose.yml
 
 # compiled output
 **/dist
-
+**/.serverless
 # Logs
 logs
 *.log

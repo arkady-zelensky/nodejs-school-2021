@@ -1,0 +1,36 @@
+service: yalantis-nodejs-school
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  endpointType: REGIONAL
+  region: eu-central-1
+  runtime: nodejs14.x
+  stage: ${opt:stage, self:custom.defaultStage}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+
+functions:
+  mainHandler:
+    handler: src/main.handler
+    events:
+      - http:
+          path: '/'
+          method: ANY
+          cors:
+            origin: '*'
+            allowCredentials: true
+          integration: lambda-proxy
+
+custom:
+  defaultStage: dev
+  serviceName: ${self:service}-${self:provider.stage}
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules:
+      forceExclude:
+        - aws-sdk
