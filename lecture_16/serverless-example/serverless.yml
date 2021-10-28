@@ -1,4 +1,5 @@
 service: yalantis-nodejs-school
+useDotenv: true
 
 plugins:
   - serverless-webpack
@@ -13,9 +14,14 @@ provider:
   environment:
     SOMEVAR: 12345
     NODE_TLS_REJECT_UNAUTHORIZED: 0
+    PG_HOST: ${env:PG_HOST}
+    PG_PORT: ${env:PG_PORT}
+    PG_USER: ${env:PG_USER}
+    PG_PASSWORD: ${env:PG_PASSWORD}
+    PG_DATABASE: ${env:PG_DATABASE}
 
 package:
-#  individually: true
+  individually: true
   excludeDevDependencies: true
 
 functions:
@@ -39,4 +45,3 @@ custom:
     includeModules:
       forceExclude:
         - aws-sdk
-        - pg-native

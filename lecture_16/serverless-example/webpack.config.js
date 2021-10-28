@@ -1,14 +1,13 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
-const nodeExternals = require('webpack-node-externals');
 const { IgnorePlugin } = require('webpack');
+
+const mode = slsw.lib.webpack.isLocal ? 'development': 'production';
+console.log(`Webpack mode: ${mode}`);
 
 module.exports = {
   entry: slsw.lib.entries,
   target: 'node', // to ignore built-in modules (path, fs..)
-  // optimization: {
-  //   concatenateModules: false,
-  // },
   module: {
     rules: [
       {
@@ -28,7 +27,7 @@ module.exports = {
       },
     ],
   },
-  mode: slsw.lib.webpack.isLocal ? 'development': 'production',
+  mode,
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -37,7 +36,6 @@ module.exports = {
     path: path.resolve(__dirname, '.webpack'),
     filename: '[name].js'
   },
-  // externals: [nodeExternals({allowlist: ['pg']})], // to ignore all modules in node_modules
   plugins: [
     new IgnorePlugin({
       resourceRegExp: /^pg-native$/,
