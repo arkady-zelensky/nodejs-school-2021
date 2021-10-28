@@ -9,17 +9,19 @@ provider:
   region: eu-central-1
   runtime: nodejs14.x
   stage: ${opt:stage, self:custom.defaultStage}
+  lambdaHashingVersion: '20201221'
   environment:
     SOMEVAR: 12345
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
 
 package:
-  individually: true
+#  individually: true
   excludeDevDependencies: true
 
 functions:
   mainHandler:
     handler: src/main.handler
-    timeout: 900 # 15 min
+#    timeout: 900 # 15 min
     events:
       - http:
           path: '/'
@@ -37,3 +39,4 @@ custom:
     includeModules:
       forceExclude:
         - aws-sdk
+        - pg-native
