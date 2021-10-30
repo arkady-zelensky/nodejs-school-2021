@@ -1,0 +1,35 @@
+{
+  "name": "lecture_11",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^7.5.1",
+    "@nestjs/core": "^7.5.1",
+    "@nestjs/passport": "^7.1.5",
+    "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/swagger": "^4.7.11",
+    "amqplib": "^0.8.0",
+    "axios": "^0.24.0",
+    "delay": "^5.0.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "p-queue": "^7.1.0",
+    "redis": "^3.1.2",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.8.2",
+    "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.175",
+    "@types/node": "^16.11.6",
+    "@types/redis": "^2.8.32"
+  }
+}
