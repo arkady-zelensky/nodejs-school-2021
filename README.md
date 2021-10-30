@@ -17,3 +17,5 @@
 ### 12. [Writing tests](lecture_12/readme.md)
 
 ### 13. [CI/CD](lecture_13/readme.md)
+
+### 16. [Cloud technologies](lecture_16/readme.md)
