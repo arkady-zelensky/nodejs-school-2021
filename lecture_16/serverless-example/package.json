@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "sls:iam": "aws sts get-caller-identity",
     "sls:local": "sls invoke local --function"
   },
   "author": "",

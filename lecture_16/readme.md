@@ -1,6 +1,9 @@
 # Lecture 16
 
+### :house: Home task
 
+
+0. Run video-hosting application in AWS lambda locally with serverless (task is optional)
 
 ### Useful links:
 [Iaas / Paas / Saas](https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/)

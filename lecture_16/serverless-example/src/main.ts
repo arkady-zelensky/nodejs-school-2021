@@ -8,7 +8,7 @@ export const handler = async (event: any, context: lambda.Context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `Hello from lambda ${process.env.SOMEVAR}!`,
+      message: `Hello from lambda local ${process.env.SOMEVAR}!`,
     }),
     headers: {'Content-Type': 'application/json'}
   }

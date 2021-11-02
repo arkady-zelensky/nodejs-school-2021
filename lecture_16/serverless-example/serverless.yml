@@ -25,17 +25,19 @@ package:
   excludeDevDependencies: true
 
 functions:
-  mainHandler:
-    handler: src/main.handler
-#    timeout: 900 # 15 min
-    events:
-      - http:
-          path: '/'
-          method: ANY
-          cors:
-            origin: '*'
-            allowCredentials: true
-          integration: lambda-proxy
+#  mainHandler:
+#    handler: src/main.handler
+##    timeout: 900 # 15 min
+#    events:
+#      - http:
+#          path: '/'
+#          method: ANY
+#          cors:
+#            origin: '*'
+#            allowCredentials: true
+#          integration: lambda-proxy
+  - ${file(serverless-resources/channels-handler.yml)}
+
 
 custom:
   defaultStage: dev
