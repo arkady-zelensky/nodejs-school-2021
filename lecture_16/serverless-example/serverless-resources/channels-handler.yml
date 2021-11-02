@@ -1,0 +1,10 @@
+channelsHandler:
+  handler: src/channels.handler
+  events:
+    - http:
+        path: '/channels'
+        method: ANY
+        cors:
+          origin: '*'
+          allowCredentials: true
+        integration: lambda-proxy

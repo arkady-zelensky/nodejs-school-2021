@@ -1,0 +1,49 @@
+service: yalantis-nodejs-school
+useDotenv: true
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  endpointType: REGIONAL
+  region: eu-central-1
+  runtime: nodejs14.x
+  stage: ${opt:stage, self:custom.defaultStage}
+  lambdaHashingVersion: '20201221'
+  environment:
+    SOMEVAR: 12345
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    PG_HOST: ${env:PG_HOST}
+    PG_PORT: ${env:PG_PORT}
+    PG_USER: ${env:PG_USER}
+    PG_PASSWORD: ${env:PG_PASSWORD}
+    PG_DATABASE: ${env:PG_DATABASE}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+
+functions:
+#  mainHandler:
+#    handler: src/main.handler
+##    timeout: 900 # 15 min
+#    events:
+#      - http:
+#          path: '/'
+#          method: ANY
+#          cors:
+#            origin: '*'
+#            allowCredentials: true
+#          integration: lambda-proxy
+  - ${file(serverless-resources/channels-handler.yml)}
+
+
+custom:
+  defaultStage: dev
+  serviceName: ${self:service}-${self:provider.stage}
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules:
+      forceExclude:
+        - aws-sdk
